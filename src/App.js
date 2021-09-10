@@ -10,10 +10,10 @@ const App = () => {
   
   return (
     <>
-      <Header title descr/>
-      <Layout title descr urlBg={ back } />
-      <Layout title descr colorBg="red" />
-      <Layout title descr urlBg={ back } />
+      <Header title="This is new title" descr="This is new Description!" />
+      <Layout title="This is new title" descr="This is new Description!" urlBg={ back } />
+      <Layout title="This is new title" descr="Thi1212121212" colorBg="red" />
+      <Layout title="This is new title" descr="This is new Description!" urlBg={ back }  />
       <Footer />
     </>
   );
