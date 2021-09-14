@@ -6,7 +6,6 @@ const App = () => {
   const [page, setPage] = useState("app");
 
   const handlerChangePage = (page) => {
-    console.log("####: <App />");
     setPage(page);
   };
 

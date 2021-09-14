@@ -4,7 +4,6 @@ import cn from "classnames";
 const Navbar = ({ onClickButton, isOpen }) => {
 
     const handlerClick = (event) => {
-        console.log("###: Navbar");
         event.preventDefault();
         onClickButton && onClickButton();
     };

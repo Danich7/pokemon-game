@@ -1,7 +1,6 @@
 const GamePage = ({ onChangePage }) => {
 
     const handlerClick = () => {
-        console.log("###: <GamePage />");
         onChangePage && onChangePage("app");
     };
 
