@@ -3,18 +3,18 @@ import { useState } from "react";
 import Menu from "../Menu";
 import Navbar from "../Navbar";
 
-const MenuHeader = () => {
+const MenuHeader = ({ bgActive }) => {
 
-	const [isOpen, setOpen] = useState(undefined);
+	const [isOpen, setOpen] = useState(null);
 
 	const handlerChangePage = () => {
-		setOpen(!isOpen);
+		setOpen(prevState => !prevState);
 	};
 
 	return (
 		<>
-			<Menu isOpen={isOpen} />
-			<Navbar onClickButton={handlerChangePage} isOpen={isOpen} />
+			<Menu onClickButton={handlerChangePage} isOpen={isOpen} />
+			<Navbar onClickButton={handlerChangePage} isOpen={isOpen} bgActive={bgActive} />
 		</>
 	)
 };
