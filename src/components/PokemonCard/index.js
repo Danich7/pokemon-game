@@ -3,7 +3,7 @@ import cn from "classnames";
 
 import cardBackSide from "./assets/card-back-side.jpg";
 
-const PokemonCard = ({name, type, img, id, values, onChangeIsActive, isActive = false}) => {
+const PokemonCard = ({name, type, img, id, values, onChangeIsActive, isActive = false, objID}) => {
     const handlerClick = () => onChangeIsActive && onChangeIsActive(id);
     
     return (

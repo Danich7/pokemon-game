@@ -28,8 +28,7 @@ const HomePage = ({ onChangePage }) => {
 			<Layout
 				title="This is new title"
 				urlBg={back}
-			>
-			</Layout>
+			/>
 		</>
 	);
 };
