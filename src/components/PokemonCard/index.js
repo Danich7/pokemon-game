@@ -4,7 +4,7 @@ import cn from "classnames";
 import cardBackSide from "./assets/card-back-side.jpg";
 
 const PokemonCard = ({name, type, img, id, values, onChangeIsActive, isActive = false}) => {
-    const handlerClick = () => onChangeIsActive && onChangeIsActive(id);
+    const handlerClick = () => onChangeIsActive && onChangeIsActive(id, isActive);
     
     return (
         <div className={s.root} onClick={handlerClick}>
