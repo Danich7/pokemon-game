@@ -17,48 +17,54 @@ const GamePage = () => {
         });
     }, []);
 
-    const handlerPokemonCard = (id, objID) => {
-        setPokemonState(prev => {
-            return Array.from(prev, (item) => {
-                if (item.id === id) {
-                    item.active = true;
-                };
-                return item;
-            });
-        });
-
+    const handlerPokemonCard = (id, isActive) => {
         setPokemonState(prevState => {
             return Object.entries(prevState).reduce((acc, item) => {
                 const pokemon = {...item[1]};
                 if (pokemon.id === id) {
-                    pokemon.active = true;
+                    pokemon.active = !isActive;
                 };
+
+                database.ref("pokemons/" + item[0]).set(pokemon);
         
                 acc[item[0]] = pokemon;
-        
                 return acc;
             }, {});
         });
-        
-        database.ref('pokemons/'+ objID).set({
-            // Один item покемона
-        });
     };
-
 
     const handlerClick = () => {
         history.push("/");
     };
 
+    const addPokemon = () => {
+        const pokemonsArr = Object.entries(pokemons);
+        const leng = pokemonsArr.length
+        const index = Math.floor(Math.random() * leng);
+        const newObj = pokemonsArr[index];
+        const pokemonItem = newObj[1];
+        const newId = Date.now();
+        pokemonItem.id = newId;
+
+        const newKey = database.ref().child('pokemons').push().key;
+        database.ref('pokemons/' + newKey).set(pokemonItem);
+        database.ref("pokemons").once("value", (snapshot) => {
+            setPokemonState(snapshot.val());
+        });
+    };
+
     return (
         <>
             <div>
-                This is Game Page!
                 <button onClick={handlerClick}>
                     End Game
                 </button>
                 <Layout
-				    title="Cards" />
+				    title="Cards"
+                />
+                <div className={s.button}>
+                    <button onClick={addPokemon}>ADD NEW POKEMON</button>
+                </div>
 				<div className={s.flex}>
 					{
 						Object.entries(pokemons).map(([key, {name, id, img, type, values, active}]) => (
