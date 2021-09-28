@@ -9,7 +9,8 @@ import { useState } from "react";
 
 const GamePage = () => {
     const [selectedPokemons, setSelectedPokemons] = useState({});
-    const [player2Cards, setPlayer2Cards] = useState({});
+    const [selectedPokemons2, setSelectedPokemons2] = useState([]);
+    const [winner, setWinner] = useState(0);
     const match = useRouteMatch();
 
     const handlerSelectedPokemons = (key, pokemon) => {
@@ -28,22 +29,24 @@ const GamePage = () => {
         });
     };
 
-    const handlerSetPlayer2 = (item) => {
-        setPlayer2Cards(prev => prev = [...item]);
+    const handlerSelectedPokemons2 = (pokemons2) => {
+        setSelectedPokemons2(pokemons2);
     };
 
-    const cleanPokemons = () => {
-        setSelectedPokemons(() => {return});
-        setPlayer2Cards(() => {return});
+    const clearPokemons = () => {
+        setSelectedPokemons(prev => { return Object() });
+        setSelectedPokemons2(prev => { return []; });
     };
 
     return (
         <PokemonContext.Provider value={{
             pokemons: selectedPokemons,
+            pokemons2: selectedPokemons2,
             onSelectedPokemons: handlerSelectedPokemons,
-            player2Pokemons: player2Cards,
-            onSetPlayer2: handlerSetPlayer2,
-            cleanCards: cleanPokemons,
+            pokemons2Selected: handlerSelectedPokemons2,
+            clearCards: clearPokemons,
+            winner: winner,
+            setWinner: setWinner,
         }}>
             <Switch>
                 <Route path="/404" component={NotFound} />
