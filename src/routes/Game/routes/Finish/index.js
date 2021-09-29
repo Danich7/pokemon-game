@@ -25,17 +25,19 @@ const FinishPage = () => {
     };
 
     const onChangeIsActive = (key) => {
-        setPokemons2(prev => {
-            return prev.reduce((acc, item) => {
-                item.selected = false;
-                if (item.id === key) {
-                    setChosenCard(item);
-                    item.selected = true;
-                };
-                acc.push(item);
-                return acc;
-            }, []);
-        });
+        if (pokemonContext.winner === 1) {
+            setPokemons2(prev => {
+                return prev.reduce((acc, item) => {
+                    item.selected = false;
+                    if (item.id === key) {
+                        setChosenCard(item);
+                        item.selected = true;
+                    };
+                    acc.push(item);
+                    return acc;
+                }, []);
+            });
+        };
     };
 
     if (Object.keys(pokemons1).length === 0) {
