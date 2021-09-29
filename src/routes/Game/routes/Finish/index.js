@@ -16,50 +16,26 @@ const FinishPage = () => {
 
     const history = useHistory();
 
-
     const handlerClickEnd = () => {
         if (chosenCard !== null) {
-            delete chosenCard.isSelected;
+            delete chosenCard.selected;
             firebase.addPokemon(chosenCard);
         };
         pokemonContext.clearCards();
-        history.push("/game");
     };
 
-    // const handlerClickEnd = () => {
-    //     if (pokemonContext.winner === 1) {
-    //         console.log("get");
-    //         firebase.addPokemon(chosenCard);
-    //     };
-    //     console.log(chosenCard);
-    //     // pokemonContext.clearCards();
-    //     console.log(pokemonContext.pokemons);
-    // };
-
-    const clickCard = (key) => {
-        console.log(888);
-        // setPokemons2(prev => {
-        //     return prev.reduce((acc, item) => {
-        //         item.selected = false;
-        //         if (item.id === key) {
-        //             setChosenCard(item);
-        //             item.selected = true;
-        //         };
-        //         acc.push(item);
-        //         return acc;
-        //     }, []);
-        // });
-
-        
-        // Object.values(pokemons2).map(item => {
-        //     if (item.id === key) {
-        //         setChosenCard(item);
-        //         item.selected = true;
-        //     };
-        //     return item;
-        // });
-        // if (pokemonContext.winner === 1) {
-        // };
+    const onChangeIsActive = (key) => {
+        setPokemons2(prev => {
+            return prev.reduce((acc, item) => {
+                item.selected = false;
+                if (item.id === key) {
+                    setChosenCard(item);
+                    item.selected = true;
+                };
+                acc.push(item);
+                return acc;
+            }, []);
+        });
     };
 
     if (Object.keys(pokemons1).length === 0) {
@@ -101,7 +77,7 @@ const FinishPage = () => {
                             values={values}
                             isActive={true}
                             isSelected={selected}
-                            clickCard={clickCard}
+                            onChangeIsActive={onChangeIsActive}
                         />
                     ))
                 }
