@@ -1,8 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { PokemonContext } from '../../../../context/pokemonContext';
+import { useDispatch, useSelector } from "react-redux";
+
 import PokemonCard from '../../../../components/PokemonCard';
 import PlayerBoard from "../Board/component/PlayerBoard";
+import { player1Card, player2Set, setWinner } from "./../../../../store/game";
 
 import s from './style.module.css';
 
@@ -24,25 +26,28 @@ const counterWin = (board, player1, player2) => {
 };
 
 const BoardPage = () => {
-    const { pokemons, pokemons2Selected, setWinner } = useContext(PokemonContext);
+    const player1Cards = useSelector(player1Card);
+    const dispatch = useDispatch();
+    
+    const history = useHistory();
 
     const [board, setBoard] = useState([]);
     const [player1, setPlayer1] = useState(() => {
-        return Object.values(pokemons).map(item => ({
+        return Object.values(player1Cards).map(item => ({
             ...item,
             possession: "blue",
         }));
     });
-
     const [player2, setPlayer2] = useState([]);
 
-    const [choiseCard, setChoiseCard] = useState(null);
     const [steps, setSteps] = useState(0);
-
+    const [choiseCard, setChoiseCard] = useState(null);
     const [turn, setTurn] = useState(1);
-
-    const history = useHistory();
     
+    if (Object.keys(player1Cards).length === 0) {
+        history.replace("/game");
+    };
+  
     useEffect(() => {
         const fetchData = async () => {
             const boardResponce = await fetch("https://reactmarathon-api.netlify.app/api/board");
@@ -58,15 +63,14 @@ const BoardPage = () => {
                     ...item,
                     possession: "red",
                 }));
-            });            
-            pokemons2Selected(player2Request.data);
+            });
+
+            dispatch(player2Set(player2Request.data.map(item => ({
+                ...item,
+            }))));
         };
         fetchData();
     }, []);
-
-    if (Object.keys(pokemons).length === 0) {
-        history.replace("/game");
-    };
 
     const handlerClickBoardPlate = async (position) => {
         const isDouble = board.some(({ card }) => {
@@ -116,7 +120,7 @@ const BoardPage = () => {
 
             if (count1 > count2) {
                 alert("WIN");
-                setWinner(1);
+                dispatch(setWinner(1));
             } else if (count1 < count2) {
                 alert("LOSE");
             } else {
