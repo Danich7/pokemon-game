@@ -1,10 +1,12 @@
+import { useHistory } from "react-router";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 
-const HomePage = ({ onChangePage }) => {
+const HomePage = () => {
+	const history = useHistory();
 
-	const handlerClickButton = (page) => {
-		onChangePage && onChangePage(page);
+	const handlerClickButton = () => {
+		history.push("/game");
 	};
 
 	return (
