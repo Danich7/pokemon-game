@@ -1,0 +1,15 @@
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.question {
+    color: #000;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: auto;
+}
+
+.question:hover {
+    color: #f300b4;
+}

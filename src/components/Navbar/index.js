@@ -1,15 +1,27 @@
-import s from "./style.module.css";
 import cn from "classnames";
+import s from "./style.module.css";
 
-const Navbar = ({ onClickButton, isOpen, bgActive = false }) => {
+import { ReactComponent as LoginSVG}  from "./../../assets/login.svg";
+
+const Navbar = ({ onClickButton, isOpen, bgActive = false, onClickLogin }) => {
     return (
         <nav id={s.navbar} className={cn(s.root, {[s.bgActive]: bgActive})}>
             <div className={s.navWrapper}>
-                <p className={s.brand}>
+                <div className={s.brand}>
                     LOGO
-                </p>
-                <div className={cn(s.menuButton, {[s.active]: isOpen})} onClick={onClickButton}>
-                    <span />
+                </div>
+                <div className={s.loginAndMenu}>
+                    <div 
+                        className={s.loginWrap}
+                        onClick={onClickLogin}
+                        >
+                        <LoginSVG />
+                    </div>
+                    <div 
+                        className={cn(s.menuButton, {[s.active]: isOpen})} 
+                        onClick={onClickButton}>
+                        <span />
+                    </div>
                 </div>
             </div>
         </nav>

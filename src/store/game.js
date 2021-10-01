@@ -44,13 +44,6 @@ export const slice = createSlice({
             player2: [],
             error: action.payload,
         }),
-
-        // fetchPokemonsReject: (state, action) => ({
-        //     ...state,
-        //     isLoading: false,
-        //     data: {},
-        //     error: action.payload,
-        // }),
     },
 });
 
@@ -59,7 +52,5 @@ export const { player2Set, setWinner, pokemonState, clean, error } = slice.actio
 export const player1Card = state => state.game.player1;
 export const player2Card = state => state.game.player2;
 export const winnerPl = state => state.game.winner;
-
-// export const gameState = state => state.game;
 
 export default slice.reducer;
