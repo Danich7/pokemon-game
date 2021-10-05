@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PokemonCard from '../../../../components/PokemonCard';
 import { addOnePokemon } from "./../../../../store/pokemons";
 import { player1Card, player2Card, winnerPl, clean } from "./../../../../store/game";
+import { selectLocalID } from "./../../../../store/user";
 
 
 import s from "./style.module.css";
@@ -14,6 +15,7 @@ const FinishPage = () => {
     const player1Cards = useSelector(player1Card);
     const player2Cards = useSelector(player2Card);
     const winnerPlayer = useSelector(winnerPl);
+    const localId = useSelector(selectLocalID);
 
     const [pokemons2, setPokemons2] = useState(player2Cards);
     const [chosenCard, setChosenCard] = useState(null);
@@ -23,7 +25,7 @@ const FinishPage = () => {
     const handlerClickEnd = () => {
         if (chosenCard !== null) {
             delete chosenCard.selected;
-            dispatch(addOnePokemon(chosenCard));
+            dispatch(addOnePokemon(chosenCard, localId));
         };
         dispatch(clean());
         history.replace("/game");

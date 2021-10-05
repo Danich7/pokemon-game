@@ -17,10 +17,11 @@ const StartPage = () => {
 
     const history = useHistory();
 
-    const [pokemons, setPokemonState] = useState(pokemonsRedux);
+    const [pokemons, setPokemonState] = useState({});
 
     useEffect(() => {
         dispatch(getPokemonsAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {

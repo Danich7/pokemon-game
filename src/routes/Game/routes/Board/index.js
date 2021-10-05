@@ -70,6 +70,7 @@ const BoardPage = () => {
             }))));
         };
         fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handlerClickBoardPlate = async (position) => {
@@ -129,6 +130,7 @@ const BoardPage = () => {
 
             history.push("/game/finish");
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [steps]);
 
     return (
